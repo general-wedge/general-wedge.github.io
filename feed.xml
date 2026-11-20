@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://general-wedge.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://general-wedge.github.io/" rel="alternate" type="text/html" /><updated>2026-11-20T01:50:13+00:00</updated><id>https://general-wedge.github.io/feed.xml</id><title type="html">Austin Howlett</title><subtitle>The personal blog of Austin Howlett — writing on software, engineering, and whatever else is worth a post.</subtitle><author><name>Austin Howlett</name></author><entry><title type="html">Am I really going to ply WoW…forever?</title><link href="https://general-wedge.github.io/blog/2026/am-i-really-going-to-play-wow-forever/" rel="alternate" type="text/html" title="Am I really going to ply WoW…forever?" /><published>2026-10-18T17:08:12+00:00</published><updated>2026-10-18T17:08:12+00:00</updated><id>https://general-wedge.github.io/blog/2026/am-i-really-going-to-play-wow-forever</id><content type="html" xml:base="https://general-wedge.github.io/blog/2026/am-i-really-going-to-play-wow-forever/"><![CDATA[<p>Yes. Yes, I will.</p>
+
+<p>I’m fully invested, I even bought the Collector’s Edition (to my partners dismay - it wasn’t cheap). This is a return to my childhood, it’s nostalgia in video game form, its the escapism that I’ve loved for most of my life. My inner nerd is beaming.</p>
+
+<p>I am having a bit of an identity crisis though, do I move over to Forever and forget Retail? Do I play both? I think I have to choose.</p>
+
+<p>I’ve played WoW now for roughly 20 years - bit depressing saying out loud; I have no regrets - but the game is currently split between multiple versions. You have the theme park style game that is dubbed “Retail”, this is the modern version of the game where 20 years of my progression and achievements live, including characters I’ve had for that amount of time, I spend majority of my play time here. Then there is “Classic” which is the remake or ode to the 2004 version of the game, many of the quality of life changes that are in modern don’t exist here and are viewed with extreme prejudice by the player base (they don’t want anything to change), but it is more an MMO, more exploration and adventure, a world you can get lost in.</p>
+
+<p>With WoW Forever, there is a promise of a return to the original “Classic” game but with new content, updated graphics, and some quality of life changes. By the way, the lighting changes are absolutely stunning. Well done, Blizzard, well done.</p>
+
+<p>So we now have three versions of the game, the split widens even more. My issue now is where do I spend my time? I’m a new Dad, and my time is precious and splitting it between Retail and Forever is quite the commitment, one in which I don’t think I can honour. While I enjoy the modern game, the promise of Forever really speaks to me. The adventure, escapism, a huge open world to explore, where spontaneous encounters are the life blood and magic of the game is what I’d like to spend my limited time doing, not checking off a list of tasks, season after season. Not to mention the seasonal content is just a reskin of a previous season content, over and over, ad nauseum.</p>
+
+<p>We’ll have to see how this promise delivers on November 4th, but this millenial is eagerly awaits with optimistic anticipation. Until then, my friends, zug zug.</p>
+
+<p>For the Alliance!</p>]]></content><author><name>Austin Howlett</name></author><category term="musings" /><category term="gaming" /><category term="opinion" /><summary type="html"><![CDATA[Blizzard won't let us go, now they want us forever]]></summary></entry><entry><title type="html">Building my personal AI benchmark (hopefully)</title><link href="https://general-wedge.github.io/blog/2026/evaluating-models-for-different-tasks-hopefully/" rel="alternate" type="text/html" title="Building my personal AI benchmark (hopefully)" /><published>2026-10-11T21:57:37+00:00</published><updated>2026-10-11T21:57:37+00:00</updated><id>https://general-wedge.github.io/blog/2026/evaluating-models-for-different-tasks-hopefully</id><content type="html" xml:base="https://general-wedge.github.io/blog/2026/evaluating-models-for-different-tasks-hopefully/"><![CDATA[<p>Hey, we’re back! I planned on posting again sooner but oh well, here we are. I’m sitting here watching the Eagles v Jaguars game who are playing in rainy London, fitting since its pretty rainy here today, but I’m noticing a pattern, maybe I’m inspired to write more watching sports… or maybe its because I can’t sit still being on the couch for this long. Who knows. Either way, I digress, on to the post…</p>
+
+<h2 id="cool-what-are-we-doing">Cool, what are we doing?</h2>
+
+<p>I recently attended Nufar Gaspar’s “Build Your Personal AI Benchmark” webinar hosted by the AI Daily Brief - well, technically, I missed it (got the times wrong, woops) but I was able to watch the recording and go through the lab - where they went through how to build your own personal benchmark to evaluate different models for a specific task that you do either daily or weekly so you can see which models perform the best for the tasks you do most often according to your personal preference.</p>
+
+<h2 id="how-to-set-this-up-in-a-nutshell">How to set this up (in a nutshell)</h2>
+
+<p>The process is essentially having the model/agent you use most often to interview you around 4-5 tasks you do daily or weekly and what success and failure looks like on what your agent returns. Something like this (these are similar to my own):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Task</th>
+      <th>Success</th>
+      <th>Failure</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Writing</td>
+      <td>Doesn’t rewrite, just fixes grammar</td>
+      <td>rewrites the entire post</td>
+    </tr>
+    <tr>
+      <td>Code review</td>
+      <td>Output is concise explaining only what’s needed</td>
+      <td>Output is too verbose</td>
+    </tr>
+    <tr>
+      <td>Research</td>
+      <td>Everything is sourced, answers what I was looking for</td>
+      <td>Basically unverified slop</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>You get the idea. This list you will work with your agent to refine and give you an example scenario for you to use in your benchmarks. Ideally, you will build a prompt that you can reuse if you ever want to change which tasks you want to eval or just want to update it.</p>
+
+<h2 id="lets-test-it-out">Let’s test it out</h2>
+
+<p>The next part is to do a blind evaluation of the models by assigning each model you want to benchmark a name or letter (ie. A, B, C) and then randomize the answers and pick the one that you agree with most. You can also score them 1 to 5 if you have multiple answers you like.</p>
+
+<p>It was suggested that you do this sequentially without looking at the answers but the way I achieved this was just tell Claude to spin up sub-agents with the models I wanted to test, in my case was Opus 5.5, Sonnet 5.5, and Haiku 5.5 and then have it do the randomization, removing any indicator of which model it is in the answers.</p>
+
+<pre><code class="language-mermaid">  flowchart LR
+    tasks["`Paste task to Claude`"]
+    subagents["`
+      *Sub Agents*
+      1. Opus
+      2. Sonnet
+      3. Haiku
+    `"]
+    randomize["`Claude randomizes answers`"]
+    answers["`
+      *Sub Agent Answers*
+      1. C
+      2. A
+      3. D
+    `"]
+    tasks --&gt; subagents --&gt; randomize --&gt; answers
+</code></pre>
+
+<p>Repeat this process for each task and then make your choices, just one sentence or so as you will pass to Claude and get it to give you a list of your finalized answers for each task, while revealing which model gave which answer.</p>
+
+<blockquote>
+  <h3 id="some-notes-on-this">Some notes on this</h3>
+  <p>For myself, someone who doesn’t have unlimited cash, I benchmarked solely Claude models since that is the product I use and have a subscription for, but you can use any combination of models you want (Opus, Astra, Grok, whatever) but also…</p>
+  <ol>
+    <li><em>Use a new chat but with the same request</em> - when you change an option that way the evaluation is the same</li>
+    <li><em>Keep the names hidden</em> - will help keep your bias out of it</li>
+    <li><em>Track other things</em> - the keenest of you will notice we didn’t track token efficency or cost, this will be helpful in the event of a tie breaker</li>
+    <li><em>Test it on release</em> - do this first with new model releases before letting the internet tell you what to think</li>
+  </ol>
+</blockquote>
+
+<h2 id="so-what-are-my-thoughts-on-the-whole-process">So what are my thoughts on the whole process?</h2>
+
+<p>I think overall it wasn’t too eye opening. The frontier models nowadays are pretty good at most things, especially my personal day to day tasks. I use Opus 5.5 with varying effort levels depending on task for majority of things, while use Haiku for general questions (although I admit I don’t like the formatting from Haiku bleh). The delta from my tests didn’t compel me enough to switch from using what I already use now but it was a fun exercise and a good check in to see if I’m using things as I should, would recommend you do this for yourself as well.</p>
+
+<p>One caveat I will say is I haven’t gone through this process at work on those type of daily/weekly tasks where, I think, finding the most optimized models to do specific tasks will bear the most fruit. Maybe I’ll make a follow up post to this once I do.</p>
+
+<h3 id="wrapping-up">Wrapping up</h3>
+
+<p>Well, that is all for this time folks. I hope the post gives you some inspiration to write your own benchmarks into how you’re using your models in your daily lives, who knows, you may have more surprising results than I did. Until next time my friends, have a wonderful Thanksgiving! Live long and prosper.</p>]]></content><author><name>Austin Howlett</name></author><category term="ai" /><category term="software" /><category term="engineering" /><category term="development" /><summary type="html"><![CDATA[Blind evaluation benchmark to see which models perform best for specific tasks]]></summary></entry><entry><title type="html">It’s about time…</title><link href="https://general-wedge.github.io/blog/2026/its-about-time/" rel="alternate" type="text/html" title="It’s about time…" /><published>2026-10-01T01:23:43+00:00</published><updated>2026-10-01T01:23:43+00:00</updated><id>https://general-wedge.github.io/blog/2026/its-about-time</id><content type="html" xml:base="https://general-wedge.github.io/blog/2026/its-about-time/"><![CDATA[<p>I’ve been meaning to start writing… well, anything, for a <strong>very</strong> long time. I’ve always put this off for one reason or another but today, my friends, today we venture into the wide world of journaling.</p>
+
+<p>Truthfully, this idea started as a way for me to reinforce my learning around software and AI (if it wasn’t obvious, yes, I am a software developer) but a technical blog doesn’t seem all that interesting, and there are many interests that are worth musing about.</p>
+
+<p>Thinking about what I will write about, I don’t think there will be any pattern to these posts, again, I don’t want to write a purely technical blog, - I will most <em>definitely</em> be writing some technical posts though - so it is likely it will be whatever peaks my curiosity and interest at the time. As I sit here watching the Toronto Maple Leafs (<strong>its our year</strong>) play the New York Islanders, I’m tempted to make a whole post about what I, as a couch coach, think of the line ups, Looking at you Raddysh and Riley…<em>yikes</em></p>
+
+<p>This is a new habit for me, and one that will need to be nurtured if there is to be any sort of cadence to these posts. There won’t be any promises here of when and how often these posts will come, actually, I’m pretty proud I’ve gone this far, let’s hope I continue on this momentum, I am motivated to, but talk is cheap, let the cadence speak for itself.</p>
+
+<p>I will end it here, short and sweet - <em>I also want to go watch the hockey game</em>. I’m excited to begin this journey and can’t wait to see where it takes me. Here is to starting new things and building life long habits. Huzzah!</p>]]></content><author><name>Austin Howlett</name></author><category term="musings" /><summary type="html"><![CDATA[The beginning of an exciting journey]]></summary></entry></feed>

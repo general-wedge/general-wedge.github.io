@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f0f0f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#181a26" media="(prefers-color-scheme: dark)">
+
+  <!-- Apply a saved theme choice before first paint (see assets/js/theme.js). -->
+  <script>
+    try {
+      var t = localStorage.getItem("theme");
+      if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  </script>
+
+  <!-- IBM Plex Sans (reading) + IBM Plex Mono (chrome) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script type="module" src="/assets/js/theme.js"></script>
+  <script type="module" src="/assets/js/diagrams.js"></script>
+  <link rel="alternate" type="application/atom+xml" title="Austin Howlett"
+        href="/feed.xml">
+
+  <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>Building my personal AI benchmark (hopefully) | Austin Howlett</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Building my personal AI benchmark (hopefully)" />
+<meta name="author" content="Austin Howlett" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Blind evaluation benchmark to see which models perform best for specific tasks" />
+<meta name="twitter:description" property="og:description" content="Blind evaluation benchmark to see which models perform best for specific tasks" />
+<link rel="canonical" href="https://general-wedge.github.io/blog/2026/evaluating-models-for-different-tasks-hopefully/" />
+<meta property="og:url" content="https://general-wedge.github.io/blog/2026/evaluating-models-for-different-tasks-hopefully/" />
+<meta property="og:site_name" content="Austin Howlett" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-10-11T21:57:37+00:00" />
+<meta property="article:modified_time" content="2026-10-11T21:57:37+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Building my personal AI benchmark (hopefully)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Austin Howlett"},"dateModified":"2026-10-11T21:57:37+00:00","datePublished":"2026-10-11T21:57:37+00:00","description":"Blind evaluation benchmark to see which models perform best for specific tasks","headline":"Building my personal AI benchmark (hopefully)","mainEntityOfPage":{"@type":"WebPage","@id":"https://general-wedge.github.io/blog/2026/evaluating-models-for-different-tasks-hopefully/"},"url":"https://general-wedge.github.io/blog/2026/evaluating-models-for-different-tasks-hopefully/"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+  <a class="site-title" href="/" aria-label="Austin Howlett, home"><span class="site-title-prompt">~/</span>austin</a>
+  <nav class="site-nav">
+    
+    <a href="/about/">about</a>
+    <a href="/tags/">tags</a>
+    <a href="/feed.xml">rss</a>
+    <button type="button" class="theme-toggle" data-theme-toggle hidden>theme</button>
+  </nav>
+</header>
+
+  <main id="main" class="site-main">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title">Building my personal AI benchmark (hopefully)</h1>
+    <p class="post-meta">
+      <time datetime="2026-10-11T21:57:37+00:00">
+        October 11, 2026
+      </time>
+      
+        <span class="post-tags">
+          
+            <a class="tag" href="/tags/#ai">#ai</a>
+          
+            <a class="tag" href="/tags/#software">#software</a>
+          
+            <a class="tag" href="/tags/#engineering">#engineering</a>
+          
+            <a class="tag" href="/tags/#development">#development</a>
+          
+        </span>
+      
+    </p>
+  </header>
+
+  <div class="post-content">
+    <p>Hey, we’re back! I planned on posting again sooner but oh well, here we are. I’m sitting here watching the Eagles v Jaguars game who are playing in rainy London, fitting since its pretty rainy here today, but I’m noticing a pattern, maybe I’m inspired to write more watching sports… or maybe its because I can’t sit still being on the couch for this long. Who knows. Either way, I digress, on to the post…</p>
+
+<h2 id="cool-what-are-we-doing">Cool, what are we doing?</h2>
+
+<p>I recently attended Nufar Gaspar’s “Build Your Personal AI Benchmark” webinar hosted by the AI Daily Brief - well, technically, I missed it (got the times wrong, woops) but I was able to watch the recording and go through the lab - where they went through how to build your own personal benchmark to evaluate different models for a specific task that you do either daily or weekly so you can see which models perform the best for the tasks you do most often according to your personal preference.</p>
+
+<h2 id="how-to-set-this-up-in-a-nutshell">How to set this up (in a nutshell)</h2>
+
+<p>The process is essentially having the model/agent you use most often to interview you around 4-5 tasks you do daily or weekly and what success and failure looks like on what your agent returns. Something like this (these are similar to my own):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Task</th>
+      <th>Success</th>
+      <th>Failure</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Writing</td>
+      <td>Doesn’t rewrite, just fixes grammar</td>
+      <td>rewrites the entire post</td>
+    </tr>
+    <tr>
+      <td>Code review</td>
+      <td>Output is concise explaining only what’s needed</td>
+      <td>Output is too verbose</td>
+    </tr>
+    <tr>
+      <td>Research</td>
+      <td>Everything is sourced, answers what I was looking for</td>
+      <td>Basically unverified slop</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>You get the idea. This list you will work with your agent to refine and give you an example scenario for you to use in your benchmarks. Ideally, you will build a prompt that you can reuse if you ever want to change which tasks you want to eval or just want to update it.</p>
+
+<h2 id="lets-test-it-out">Let’s test it out</h2>
+
+<p>The next part is to do a blind evaluation of the models by assigning each model you want to benchmark a name or letter (ie. A, B, C) and then randomize the answers and pick the one that you agree with most. You can also score them 1 to 5 if you have multiple answers you like.</p>
+
+<p>It was suggested that you do this sequentially without looking at the answers but the way I achieved this was just tell Claude to spin up sub-agents with the models I wanted to test, in my case was Opus 5.5, Sonnet 5.5, and Haiku 5.5 and then have it do the randomization, removing any indicator of which model it is in the answers.</p>
+
+<pre><code class="language-mermaid">  flowchart LR
+    tasks["`Paste task to Claude`"]
+    subagents["`
+      *Sub Agents*
+      1. Opus
+      2. Sonnet
+      3. Haiku
+    `"]
+    randomize["`Claude randomizes answers`"]
+    answers["`
+      *Sub Agent Answers*
+      1. C
+      2. A
+      3. D
+    `"]
+    tasks --&gt; subagents --&gt; randomize --&gt; answers
+</code></pre>
+
+<p>Repeat this process for each task and then make your choices, just one sentence or so as you will pass to Claude and get it to give you a list of your finalized answers for each task, while revealing which model gave which answer.</p>
+
+<blockquote>
+  <h3 id="some-notes-on-this">Some notes on this</h3>
+  <p>For myself, someone who doesn’t have unlimited cash, I benchmarked solely Claude models since that is the product I use and have a subscription for, but you can use any combination of models you want (Opus, Astra, Grok, whatever) but also…</p>
+  <ol>
+    <li><em>Use a new chat but with the same request</em> - when you change an option that way the evaluation is the same</li>
+    <li><em>Keep the names hidden</em> - will help keep your bias out of it</li>
+    <li><em>Track other things</em> - the keenest of you will notice we didn’t track token efficency or cost, this will be helpful in the event of a tie breaker</li>
+    <li><em>Test it on release</em> - do this first with new model releases before letting the internet tell you what to think</li>
+  </ol>
+</blockquote>
+
+<h2 id="so-what-are-my-thoughts-on-the-whole-process">So what are my thoughts on the whole process?</h2>
+
+<p>I think overall it wasn’t too eye opening. The frontier models nowadays are pretty good at most things, especially my personal day to day tasks. I use Opus 5.5 with varying effort levels depending on task for majority of things, while use Haiku for general questions (although I admit I don’t like the formatting from Haiku bleh). The delta from my tests didn’t compel me enough to switch from using what I already use now but it was a fun exercise and a good check in to see if I’m using things as I should, would recommend you do this for yourself as well.</p>
+
+<p>One caveat I will say is I haven’t gone through this process at work on those type of daily/weekly tasks where, I think, finding the most optimized models to do specific tasks will bear the most fruit. Maybe I’ll make a follow up post to this once I do.</p>
+
+<h3 id="wrapping-up">Wrapping up</h3>
+
+<p>Well, that is all for this time folks. I hope the post gives you some inspiration to write your own benchmarks into how you’re using your models in your daily lives, who knows, you may have more surprising results than I did. Until next time my friends, have a wonderful Thanksgiving! Live long and prosper.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <a href="/">&larr; All posts</a>
+  </footer>
+</article>
+
+  </main>
+  <footer class="site-footer">
+  <p>
+    &copy; 2026 Austin Howlett.
+    Built with <a href="https://jekyllrb.com/">Jekyll</a>.
+    <a href="/feed.xml">RSS</a>.
+  </p>
+</footer>
+
+</body>
+</html>
